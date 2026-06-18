@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brújula Joven — Liderazgo con Propósito | Atrevete</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="theme-color" content="#0B5F56">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EG5ZJQ92CP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EG5ZJQ92CP');
+</script>
+
+<style>
+:root{
+  --naranja:#FF6B35;
+  --sol:#FFD23F;
+  --verde:#0B5F56;
+  --noche:#1A1A2E;
+  --crema:#F7F4ED;
+  --coral:#FF3D68;
+  --verde-claro:#E3F3EF;
+  --texto:#1A1A2E;
+  --gris:#6B6B7B;
+  --radio:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--crema);
+  color:var(--texto);
+  min-height:100vh;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.font-display{font-family:'Sora',sans-serif;}
+
+/* ===== Capas de pantalla ===== */
+.screen{display:none;min-height:100vh;animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important; transition-duration:.001s !important;}
+}
+
+/* ===== Onboarding ===== */
+#screen-welcome{
+  background:radial-gradient(circle at 20% 0%, #2A2A4A 0%, var(--noche) 55%);
+  color:white;
+  padding:48px 24px 64px;
+  position:relative;
+  overflow:hidden;
+}
+#screen-welcome::before{
+  content:"";
+  position:absolute;
+  top:-120px;right:-120px;
+  width:340px;height:340px;
+  background:radial-gradient(circle, var(--naranja) 0%, transparent 70%);
+  opacity:.35;
+  border-radius:50%;
+}
+#screen-welcome::after{
+  content:"";
+  position:absolute;
+  bottom:-160px;left:-100px;
+  width:380px;height:380px;
+  background:radial-gradient(circle, var(--sol) 0%, transparent 70%);
+  opacity:.18;
+  border-radius:50%;
+}
+.welcome-wrap{position:relative;z-index:2;max-width:480px;margin:0 auto;text-align:center;}
+.badge-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:30px;
+  padding:7px 16px;
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.3px;
+  margin-bottom:28px;
+}
+.welcome-eyebrow{
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--sol);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+h1.hero-title{
+  font-size:2.5rem;
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-1px;
+  margin-bottom:18px;
+}
+h1.hero-title span{color:var(--naranja);}
+.hero-sub{
+  font-size:1.05rem;
+  color:rgba(255,255,255,.78);
+  margin-bottom:36px;
+  max-width:380px;
+  margin-left:auto;margin-right:auto;
+}
+.compass-hero{
+  width:150px;height:150px;
+  margin:0 auto 36px;
+  position:relative;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;
+  background:linear-gradient(100deg, var(--naranja) 0%, var(--coral) 100%);
+  color:white;
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:1.05rem;
+  padding:18px;
+  border:none;
+  border-radius:16px;
+  cursor:pointer;
+  box-shadow:0 10px 30px -8px rgba(255,107,53,.55);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -6px rgba(255,107,53,.65);}
+.btn-primary:active{transform:translateY(0);}
+.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;
+  background:transparent;
+  color:rgba(255,255,255,.7);
+  font-weight:600;
+  font-size:.95rem;
+  padding:14px;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+  text-decoration:underline;
+  text-decoration-color:rgba(255,255,255,.3);
+}
+.stats-row{
+  display:flex;justify-content:center;gap:28px;
+  margin-top:40px;
+  font-size:.8rem;
+  color:rgba(255,255,255,.55);
+}
+.stats-row b{display:block;color:white;font-family:'Sora',sans-serif;font-size:1.2rem;}
+
+/* ===== Setup (nombre + sueño) ===== */
+#screen-setup{background:var(--crema);padding:40px 22px 60px;}
+.setup-wrap{max-width:480px;margin:0 auto;}
+.setup-step-label{
+  font-size:.8rem;font-weight:700;color:var(--naranja);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;
+}
+.setup-title{font-size:1.65rem;font-weight:800;margin-bottom:10px;line-height:1.2;}
+.setup-helper{color:var(--gris);font-size:.95rem;margin-bottom:28px;}
+.input-field{
+  width:100%;
+  padding:16px 18px;
+  border:2px solid #E5E0D4;
+  border-radius:14px;
+  font-family:'Inter',sans-serif;
+  font-size:1rem;
+  background:white;
+  margin-bottom:16px;
+  transition:border-color .15s;
+}
+.input-field:focus{outline:none;border-color:var(--naranja);}
+textarea.input-field{resize:vertical;min-height:90px;}
+.icon-circle{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--verde-claro);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;margin-bottom:20px;
+}
+
+/* ===== Quiz diagnóstico ===== */
+#screen-quiz{background:var(--crema);padding:0 0 100px;}
+.quiz-header{
+  position:sticky;top:0;z-index:10;
+  background:var(--crema);
+  padding:18px 22px 14px;
+  border-bottom:1px solid #EAE4D4;
+}
+.progress-track{
+  width:100%;height:8px;
+  background:#E5E0D4;
+  border-radius:8px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--naranja), var(--sol));
+  border-radius:8px;
+  transition:width .35s ease;
+  width:0%;
+}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--gris);font-weight:600;}
+.cat-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--verde-claro);
+  color:var(--verde);
+  font-size:.78rem;font-weight:700;
+  padding:6px 14px;border-radius:20px;
+  margin-bottom:14px;
+}
+.quiz-body{max-width:560px;margin:0 auto;padding:24px 22px 0;}
+.q-context{
+  font-size:.88rem;font-style:italic;color:var(--gris);
+  background:white;border-left:4px solid var(--sol);
+  padding:12px 16px;border-radius:0 12px 12px 0;
+  margin-bottom:18px;
+}
+.q-text{font-size:1.2rem;font-weight:700;line-height:1.3;margin-bottom:22px;}
+.opt-list{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  display:flex;align-items:flex-start;gap:12px;
+  background:white;
+  border:2px solid #EAE4D4;
+  border-radius:14px;
+  padding:14px 16px;
+  cursor:pointer;
+  font-size:.94rem;
+  transition:all .15s ease;
+}
+.opt:hover{border-color:var(--sol);background:#FFFBF0;}
+.opt.selected{
+  border-color:var(--naranja);
+  background:#FFF1EA;
+  font-weight:600;
+}
+.opt-dot{
+  flex-shrink:0;
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid #D9D3C2;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.opt.selected .opt-dot{border-color:var(--naranja);background:var(--naranja);}
+.opt.selected .opt-dot::after{content:"";width:8px;height:8px;border-radius:50%;background:white;}
+.quiz-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:linear-gradient(to top, var(--crema) 70%, transparent);
+  padding:20px 22px 24px;
+}
+.quiz-nav-inner{max-width:560px;margin:0 auto;display:flex;gap:12px;}
+.btn-nav-back{
+  flex:0 0 auto;
+  padding:16px 20px;
+  border-radius:14px;
+  border:2px solid #E5E0D4;
+  background:white;
+  font-weight:700;
+  color:var(--texto);
+  cursor:pointer;
+}
+.btn-nav-next{
+  flex:1;
+  padding:16px;
+  border-radius:14px;
+  border:none;
+  background:linear-gradient(100deg, var(--naranja), var(--coral));
+  color:white;
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  opacity:.4;
+  pointer-events:none;
+  transition:opacity .15s;
+}
+.btn-nav-next.enabled{opacity:1;pointer-events:auto;}
+
+/* ===== Resultado diagnóstico ===== */
+#screen-result{background:linear-gradient(180deg, #2A2A4A 0%, var(--noche) 100%);color:white;padding:50px 22px 60px;text-align:center;}
+.result-wrap{max-width:480px;margin:0 auto;}
+.result-ring-wrap{position:relative;width:200px;height:200px;margin:0 auto 24px;}
+.level-name{font-family:'Sora',sans-serif;font-weight:800;font-size:1.7rem;margin-bottom:10px;}
+.level-desc{color:rgba(255,255,255,.75);font-size:.98rem;margin-bottom:32px;}
+.result-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:20px;
+  text-align:left;
+  margin-bottom:16px;
+}
+.result-card-title{font-size:.78rem;font-weight:700;color:var(--sol);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.result-card p{font-size:.92rem;color:rgba(255,255,255,.85);}
+
+/* ===== Dashboard diario ===== */
+#screen-dashboard{background:var(--crema);padding-bottom:60px;}
+.dash-top{
+  background:linear-gradient(135deg, var(--verde) 0%, #0E7A6D 100%);
+  color:white;
+  padding:28px 22px 36px;
+  border-radius:0 0 32px 32px;
+  position:relative;
+  overflow:hidden;
+}
+.dash-top::after{
+  content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+  background:radial-gradient(circle, var(--sol) 0%, transparent 70%);opacity:.25;border-radius:50%;
+}
+.dash-top-row{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;}
+.greeting{font-size:.85rem;color:rgba(255,255,255,.75);margin-bottom:4px;}
+.greeting-name{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;}
+.streak-badge{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.14);
+  border-radius:30px;
+  padding:8px 14px;
+  font-weight:700;
+  font-size:.95rem;
+}
+.dream-line{
+  margin-top:18px;
+  background:rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:14px 16px;
+  font-size:.9rem;
+  position:relative;z-index:1;
+}
+.dream-line b{font-family:'Sora',sans-serif;display:block;font-size:1rem;margin-top:2px;}
+
+.dash-body{max-width:540px;margin:0 auto;padding:0 22px;margin-top:-18px;}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 6px 24px -8px rgba(26,26,46,.08);
+  margin-bottom:18px;
+}
+.card-eyebrow{
+  font-size:.76rem;font-weight:700;color:var(--naranja);
+  text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.daily-q{font-size:1.15rem;font-weight:700;line-height:1.32;margin-bottom:16px;}
+.scale-row{display:flex;gap:8px;margin-bottom:14px;}
+.scale-btn{
+  flex:1;aspect-ratio:1;
+  border-radius:12px;
+  border:2px solid #EAE4D4;
+  background:#FAF8F2;
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:1.05rem;
+  cursor:pointer;
+  transition:all .15s;
+}
+.scale-btn:hover{border-color:var(--sol);}
+.scale-btn.active{
+  background:linear-gradient(135deg, var(--naranja), var(--coral));
+  border-color:transparent;color:white;transform:scale(1.06);
+}
+textarea.note-field{
+  width:100%;border:2px solid #EAE4D4;border-radius:12px;
+  padding:12px 14px;font-family:'Inter',sans-serif;font-size:.92rem;
+  min-height:70px;resize:vertical;margin-bottom:14px;
+}
+textarea.note-field:focus{outline:none;border-color:var(--naranja);}
+.btn-save{
+  width:100%;padding:15px;border:none;border-radius:14px;
+  background:linear-gradient(100deg, var(--naranja), var(--coral));
+  color:white;font-family:'Sora',sans-serif;font-weight:700;font-size:.98rem;
+  cursor:pointer;
+}
+.done-state{text-align:center;padding:10px 0;}
+.done-state .check-circle{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--verde-claro);color:var(--verde);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;margin:0 auto 12px;
+}
+.done-state p{color:var(--gris);font-size:.92rem;}
+
+.compass-card{display:flex;align-items:center;gap:18px;}
+.compass-mini{width:90px;height:90px;flex-shrink:0;position:relative;}
+.compass-info b{font-family:'Sora',sans-serif;font-size:1rem;display:block;margin-bottom:4px;}
+.compass-info p{font-size:.85rem;color:var(--gris);}
+
+.week-strip{display:flex;justify-content:space-between;margin-top:6px;}
+.day-pip{
+  display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--gris);font-weight:600;
+}
+.day-pip .dot{
+  width:30px;height:30px;border-radius:50%;
+  background:#EFEAdb;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;
+}
+.day-pip.filled .dot{background:linear-gradient(135deg, var(--naranja), var(--sol));color:white;}
+.day-pip.today .dot{box-shadow:0 0 0 3px var(--verde-claro);}
+
+.history-item{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:12px 0;border-bottom:1px solid #F0ECE0;
+}
+.history-item:last-child{border-bottom:none;}
+.history-date{font-size:.75rem;color:var(--gris);font-weight:600;white-space:nowrap;margin-left:12px;}
+.history-q{font-size:.88rem;color:var(--texto);}
+.history-score{
+  font-family:'Sora',sans-serif;font-weight:800;color:var(--naranja);font-size:1rem;
+}
+
+.section-title{font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:4px;}
+.section-sub{font-size:.85rem;color:var(--gris);margin-bottom:14px;}
+
+.empty-history{text-align:center;color:var(--gris);font-size:.88rem;padding:20px 0;}
+
+.btn-link-small{
+  background:none;border:none;color:var(--naranja);font-weight:700;font-size:.85rem;cursor:pointer;
+  text-decoration:underline;
+}
+
+/* ===== Notificaciones ===== */
+.notif-card{
+  background:linear-gradient(135deg, #FFF1EA 0%, #FFF8E5 100%);
+  border:1px solid #FFE0CC;
+}
+.notif-status-row{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;
+}
+.notif-icon-circle{
+  width:42px;height:42px;border-radius:50%;
+  background:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.notif-status-text b{display:block;font-size:.92rem;}
+.notif-status-text span{font-size:.78rem;color:var(--gris);}
+.time-picker-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.time-picker-row input[type="time"]{
+  flex:1;padding:13px 14px;border:2px solid #EAE4D4;border-radius:12px;
+  font-family:'Inter',sans-serif;font-size:1rem;background:white;
+}
+.time-picker-row input[type="time"]:focus{outline:none;border-color:var(--naranja);}
+.notif-note{
+  font-size:.78rem;color:var(--gris);
+  background:rgba(255,255,255,.6);
+  border-radius:10px;padding:10px 12px;
+  margin-bottom:14px;
+  line-height:1.4;
+}
+.notif-note b{color:var(--texto);}
+.btn-toggle-notif{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  font-family:'Sora',sans-serif;font-weight:700;font-size:.92rem;
+  cursor:pointer;
+}
+.btn-toggle-notif.activate{
+  background:linear-gradient(100deg, var(--naranja), var(--coral));color:white;
+}
+.btn-toggle-notif.deactivate{
+  background:white;border:2px solid #EAE4D4;color:var(--gris);
+}
+.streak-lost-banner{
+  background:linear-gradient(135deg, #FFE8D6, #FFF3D6);
+  border:1px solid #FFD9A8;
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:18px;
+  font-size:.88rem;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.streak-lost-banner .emoji{font-size:1.3rem;flex-shrink:0;}
+
+footer.app-footer{text-align:center;font-size:.78rem;color:var(--gris);padding:30px 22px 10px;}
+
+@media (max-width:380px){
+  h1.hero-title{font-size:2.1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 1: BIENVENIDA                                        -->
+<!-- ============================================================ -->
+<section id="screen-welcome" class="screen active">
+  <div class="welcome-wrap">
+    <span class="badge-pill">🧭 Atrevete</span>
+    <div class="compass-hero">
+      <svg viewBox="0 0 150 150" width="150" height="150">
+        <circle cx="75" cy="75" r="68" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="6"/>
+        <circle cx="75" cy="75" r="68" fill="none" stroke="url(#gradWelcome)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="427" stroke-dashoffset="320" transform="rotate(-90 75 75)"/>
+        <defs>
+          <linearGradient id="gradWelcome" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF6B35"/>
+            <stop offset="100%" stop-color="#FFD23F"/>
+          </linearGradient>
+        </defs>
+        <text x="75" y="68" text-anchor="middle" font-size="38">🧭</text>
+        <text x="75" y="100" text-anchor="middle" font-size="11" fill="white" font-family="Sora" font-weight="700">CADA DÍA</text>
+      </svg>
+    </div>
+    <h1 class="hero-title">Brújula <span>Joven</span></h1>
+    <p class="hero-sub">Liderazgo con propósito para construir, día a día, los hábitos que te acerquen a tus sueños.</p>
+
+    <button class="btn-primary" onclick="goTo('screen-setup')">Empezar mi camino →</button>
+    <button class="btn-ghost" onclick="goTo('screen-dashboard'); renderDashboard();">Ya tengo una cuenta, continuar</button>
+
+    <div class="stats-row">
+      <div><b>28</b>preguntas clave</div>
+      <div><b>4</b>momentos</div>
+      <div><b>365</b>días para crecer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 2: SETUP (nombre + sueño)                            -->
+<!-- ============================================================ -->
+<section id="screen-setup" class="screen">
+  <div class="setup-wrap">
+    <div class="icon-circle">👋</div>
+    <div class="setup-step-label">Paso 1 de 2</div>
+    <div class="setup-title">¿Cómo te llamas?</div>
+    <div class="setup-helper">Así podremos saludarte cada día.</div>
+    <input type="text" id="input-name" class="input-field" placeholder="Tu nombre">
+
+    <div class="setup-step-label" style="margin-top:18px;">Paso 2 de 2</div>
+    <div class="setup-title">¿Cuál es tu sueño más grande?</div>
+    <div class="setup-helper">Una frase corta. Lo verás cada día como recordatorio de hacia dónde vas.</div>
+    <textarea id="input-dream" class="input-field" placeholder="Ejemplo: Ser ingeniero y crear oportunidades de empleo en Rionegro"></textarea>
+
+    <button class="btn-primary" onclick="saveSetupAndStart()">Comenzar diagnóstico inicial →</button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 3: QUIZ DIAGNÓSTICO (28 preguntas)                   -->
+<!-- ============================================================ -->
+<section id="screen-quiz" class="screen">
+  <div class="quiz-header">
+    <div class="quiz-meta">
+      <span id="quiz-progress-label">Pregunta 1 de 28</span>
+      <span id="quiz-cat-label">Identidad</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+  <div class="quiz-body">
+    <span class="cat-chip" id="cat-chip">🧭 Momento 1 — Identidad</span>
+    <div class="q-context" id="q-context"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="opt-list" id="opt-list"></div>
+  </div>
+  <div class="quiz-nav">
+    <div class="quiz-nav-inner">
+      <button class="btn-nav-back" id="btn-back" onclick="prevQuestion()">←</button>
+      <button class="btn-nav-next" id="btn-next" onclick="nextQuestion()">Siguiente</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 4: RESULTADO DEL DIAGNÓSTICO                         -->
+<!-- ============================================================ -->
+<section id="screen-result" class="screen">
+  <div class="result-wrap">
+    <div class="result-ring-wrap">
+      <svg viewBox="0 0 200 200" width="200" height="200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="14"/>
+        <circle id="result-ring" cx="100" cy="100" r="86" fill="none" stroke="url(#gradResult)" stroke-width="14"
+          stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540" transform="rotate(-90 100 100)"/>
+        <defs>
+          <linearGradient id="gradResult" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF6B35"/>
+            <stop offset="100%" stop-color="#FFD23F"/>
+          </linearGradient>
+        </defs>
+        <text id="result-score-svg" x="100" y="95" text-anchor="middle" font-size="34" fill="white" font-family="Sora" font-weight="800">0</text>
+        <text x="100" y="120" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.6)" font-family="Inter">de 140 puntos</text>
+      </svg>
+    </div>
+    <div class="level-name" id="level-name">Calculando...</div>
+    <div class="level-desc" id="level-desc"></div>
+
+    <div class="result-card">
+      <div class="result-card-title">Tu reto inmediato</div>
+      <p id="level-action"></p>
+    </div>
+
+    <button class="btn-primary" onclick="goTo('screen-dashboard'); renderDashboard();">Empezar mi seguimiento diario →</button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 5: DASHBOARD DIARIO                                  -->
+<!-- ============================================================ -->
+<section id="screen-dashboard" class="screen">
+  <div class="dash-top">
+    <div class="dash-top-row">
+      <div>
+        <div class="greeting" id="dash-greeting">Hola de nuevo,</div>
+        <div class="greeting-name" id="dash-name">—</div>
+      </div>
+      <div class="streak-badge">🔥 <span id="streak-count">0</span> días</div>
+    </div>
+    <div class="dream-line">
+      Tu sueño guía
+      <b id="dash-dream">—</b>
+    </div>
+  </div>
+
+  <div class="dash-body">
+
+    <!-- Banner: racha perdida (se muestra dinámicamente si aplica) -->
+    <div id="streak-lost-banner" style="display:none;"></div>
+
+    <!-- Tarjeta: pregunta del día -->
+    <div class="card" id="card-daily">
+      <div class="card-eyebrow">📍 Pregunta del día</div>
+      <div class="daily-q" id="daily-question">—</div>
+      <div class="scale-row" id="scale-row"></div>
+      <textarea class="note-field" id="daily-note" placeholder="¿Qué harás distinto mañana? (opcional)"></textarea>
+      <button class="btn-save" id="btn-save-daily" onclick="saveDailyCheckin()">Guardar mi respuesta de hoy</button>
+    </div>
+
+    <!-- Tarjeta: notificaciones -->
+    <div class="card notif-card">
+      <div class="card-eyebrow">🔔 Recordatorio diario</div>
+      <div class="notif-status-row">
+        <div class="notif-icon-circle" id="notif-status-icon">🔕</div>
+        <div class="notif-status-text">
+          <b id="notif-status-title">Sin recordatorio activo</b>
+          <span id="notif-status-sub">Elige una hora y actívalo</span>
+        </div>
+      </div>
+      <div class="time-picker-row">
+        <input type="time" id="notif-time-input" value="19:30">
+      </div>
+      <div class="notif-note">
+        <b>Importante:</b> esta notificación funciona mientras tengas el navegador abierto (puede estar minimizado) o si instalaste esta app en tu pantalla de inicio. Si cierras completamente el navegador o reinicias el celular, no llegará hasta que vuelvas a abrir la app.
+      </div>
+      <button class="btn-toggle-notif activate" id="btn-toggle-notif" onclick="toggleNotifications()">Activar recordatorio diario</button>
+    </div>
+
+    <!-- Tarjeta: racha semanal -->
+    <div class="card">
+      <div class="section-title">Tu semana</div>
+      <div class="section-sub">Cada punto naranja es un día en que te detuviste a pensar en tu avance.</div>
+      <div class="week-strip" id="week-strip"></div>
+    </div>
+
+    <!-- Tarjeta: brújula de progreso -->
+    <div class="card compass-card">
+      <div class="compass-mini">
+        <svg viewBox="0 0 90 90" width="90" height="90">
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#EAE4D4" stroke-width="9"/>
+          <circle id="mini-ring" cx="45" cy="45" r="38" fill="none" stroke="url(#gradMini)" stroke-width="9"
+            stroke-linecap="round" stroke-dasharray="239" stroke-dashoffset="239" transform="rotate(-90 45 45)"/>
+          <defs>
+            <linearGradient id="gradMini" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0B5F56"/>
+              <stop offset="100%" stop-color="#FFD23F"/>
+            </linearGradient>
+          </defs>
+          <text x="45" y="50" text-anchor="middle" font-size="20">🧭</text>
+        </svg>
+      </div>
+      <div class="compass-info">
+        <b id="compass-level-name">Nivel actual</b>
+        <p id="compass-level-desc">Sigue respondiendo cada día para ver tu brújula avanzar.</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta: historial -->
+    <div class="card">
+      <div class="section-title">Tu historial de reflexiones</div>
+      <div class="section-sub">Así ha ido cambiando tu forma de pensar tu propio avance.</div>
+      <div id="history-list"></div>
+    </div>
+
+    <button class="btn-link-small" onclick="goTo('screen-setup')" style="display:block;margin:10px auto 0;">Editar mi nombre o mi sueño</button>
+    <button class="btn-link-small" onclick="confirmReset()" style="display:block;margin:14px auto 0;color:#999;">Reiniciar todos mis datos</button>
+
+  </div>
+  <footer class="app-footer">Brújula Joven · Liderazgo Praxeológico para jóvenes de Rionegro, Santander</footer>
+</section>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   DATOS: 28 preguntas del diagnóstico inicial
+   ════════════════════════════════════════════════════════════ */
+const diagnostico = [
+  { cat:1, q:"Cuando piensas en tu futuro, ¿qué tan claro tienes lo que quieres lograr en los próximos 5 años?",
+    ctx:"El primer paso de todo líder es tener un sueño nombrado, no solo una idea vaga de éxito.",
+    ops:["No he pensado realmente en eso, vivo el día a día.","Tengo una idea general, pero no la he escrito ni hablado con nadie.","Sé qué quiero estudiar o hacer, aunque me falta un plan claro.","Tengo metas concretas y las he compartido con mi familia o profesores.","Tengo un sueño definido, lo tengo escrito y trabajo en él cada semana."] },
+  { cat:1, q:"¿Te identificas como una persona capaz de liderar, incluso si nunca has tenido un cargo o título formal?",
+    ctx:"El liderazgo praxeológico empieza por reconocerse agente de cambio, no por un cargo.",
+    ops:["Creo que liderar es para otros, no para mí.","A veces siento que podría, pero me da miedo intentarlo.","Lidero solo cuando me lo piden explícitamente.","Tomo la iniciativa en mi grupo de amigos o en clase con frecuencia.","Me veo a mí mismo como un líder y actúo así incluso sin que nadie me lo pida."] },
+  { cat:1, q:"¿Qué lugar ocupa tu ciudad (o tu municipio) en tu proyecto de vida?",
+    ctx:"Un liderazgo con propósito conecta el sueño personal con el territorio que lo vio crecer.",
+    ops:["Quiero irme y no pienso volver ni aportar aquí.","No he pensado en qué relación tengo con mi pueblo o ciudad.","Me gustaría que mi municipio mejorara, pero no veo cómo puedo ayudar.","Quiero estudiar o trabajar fuera, pero regresar a aportar lo aprendido.","Veo mi futuro ligado a transformar las oportunidades de mi comunidad, esté donde esté."] },
+  { cat:1, q:"Cuando algo no te sale bien, ¿cómo te hablas a ti mismo internamente?",
+    ctx:"La voz interior que un joven construye hoy es la base de su resiliencia futura.",
+    ops:["Me digo cosas duras, como que soy un fracaso o que nunca voy a poder.","Me frustro mucho y necesito varios días para recuperar el ánimo.","Me cuesta, pero trato de calmarme y seguir adelante.","Reconozco el error, aprendo de él y me doy otra oportunidad.","Me hablo con respeto, identifico qué aprender y vuelvo a intentar con más fuerza."] },
+  { cat:1, q:"¿Reconoces al menos tres cualidades o talentos propios que podrían servir a otros?",
+    ctx:"Nadie puede ofrecer al mundo lo que no sabe que tiene.",
+    ops:["No sabría decir cuáles son mis cualidades o talentos.","Tengo una idea muy vaga, nunca lo he pensado a fondo.","Reconozco una o dos cosas en las que soy bueno.","Tengo claridad sobre varios talentos y los uso en mi día a día.","Conozco bien mis fortalezas y busco activamente formas de ponerlas al servicio de otros."] },
+  { cat:1, q:"¿Cuánto te importa lo que otros piensen de ti al momento de tomar decisiones importantes?",
+    ctx:"Un líder con identidad firme escucha, pero no se deja arrastrar por la opinión ajena.",
+    ops:["Decido casi siempre según lo que la mayoría espera de mí.","Me cuesta mucho ir contra la corriente del grupo.","Considero la opinión de otros, pero a veces cedo por miedo al rechazo.","Escucho a los demás, pero generalmente decido según mis valores.","Tomo decisiones basado en lo que creo correcto, aunque no sea lo más popular."] },
+  { cat:1, q:"¿Tienes claro qué valores no estás dispuesto a negociar, sin importar la presión del entorno?",
+    ctx:"La identidad de un líder se mide en los momentos donde es más fácil ceder que sostenerse.",
+    ops:["No he pensado en cuáles son mis valores innegociables.","Tengo algunas ideas, pero en la práctica suelo ceder con facilidad.","Identifico dos o tres valores importantes para mí.","Tengo valores claros y generalmente los defiendo en situaciones difíciles.","Mis valores guían mis decisiones diarias, incluso cuando eso me cuesta popularidad o comodidad."] },
+
+  { cat:2, q:"¿Tienes una rutina diaria que te acerque, paso a paso, a tus metas?",
+    ctx:"Los grandes sueños se construyen con sistemas pequeños y repetidos, no con momentos aislados de motivación.",
+    ops:["No tengo ninguna rutina, cada día improviso.","Tengo intenciones, pero rara vez las cumplo de forma constante.","Sigo una rutina solo cuando hay un examen o evento cercano.","Tengo hábitos de estudio o trabajo que mantengo casi toda la semana.","Tengo una rutina clara y la sigo con disciplina, incluso cuando no tengo ganas."] },
+  { cat:2, q:"¿Cómo manejas tu tiempo entre el estudio, el celular/redes sociales y tu descanso?",
+    ctx:"El uso del tiempo libre revela, más que las palabras, lo que un joven realmente prioriza.",
+    ops:["Paso la mayoría del tiempo libre en el celular sin darme cuenta de las horas.","Sé que abuso del celular, pero no he logrado controlarlo.","Intento limitar mi tiempo de pantalla, aunque con resultados irregulares.","Organizo bloques de tiempo para estudiar, descansar y usar el celular.","Controlo conscientemente mi tiempo de pantalla para que no robe mis metas."] },
+  { cat:2, q:"Cuando te propones una meta pequeña (como leer un libro o mejorar una nota), ¿qué tan seguido la cumples?",
+    ctx:"La confianza en uno mismo se construye cumpliendo pequeñas promesas, no solo con grandes discursos.",
+    ops:["Casi nunca termino lo que empiezo.","Empiezo con ánimo, pero abandono a la primera dificultad.","Cumplo aproximadamente la mitad de mis metas pequeñas.","Cumplo la mayoría de mis propósitos, aunque a veces con retraso.","Casi siempre cumplo lo que me propongo, sin importar el esfuerzo que requiera."] },
+  { cat:2, q:"¿Practicas algún hábito de cuidado personal (sueño, alimentación, ejercicio) de forma consciente?",
+    ctx:"Un cuerpo y una mente descuidados limitan la energía disponible para liderar y soñar en grande.",
+    ops:["No le presto atención a mi sueño, alimentación ni actividad física.","Sé que debería cuidarme más, pero no hago cambios reales.","Cuido alguno de estos aspectos, aunque descuido los otros.","Mantengo hábitos saludables la mayoría de los días de la semana.","Cuido mi cuerpo y mi mente de forma constante porque entiendo que es parte de mi liderazgo."] },
+  { cat:2, q:"¿Tomas notas, planificas o llevas algún registro de tus tareas y compromisos?",
+    ctx:"La organización es un acto de respeto hacia el propio tiempo y hacia quienes confían en uno.",
+    ops:["No organizo nada, dependo de recordar las cosas de memoria.","Intento anotar algo, pero pierdo o abandono el registro fácilmente.","Uso una agenda o el celular para tareas importantes ocasionalmente.","Planifico mi semana con regularidad y reviso mis pendientes.","Tengo un sistema claro de planificación que reviso y ajusto cada semana."] },
+  { cat:2, q:"Cuando recibes una tarea o proyecto grupal en el colegio, ¿qué papel sueles tomar?",
+    ctx:"El liderazgo cotidiano se entrena primero en los pequeños trabajos en equipo del aula.",
+    ops:["Prefiero que otros decidan y yo solo cumplo lo mínimo.","Participo si me lo asignan, pero no propongo ideas propias.","Aporto ideas cuando me preguntan directamente.","Suelo proponer cómo organizar el trabajo y motivar al equipo.","Tomo la iniciativa de organizar, repartir tareas y asegurarme de que todos cumplan."] },
+  { cat:2, q:"¿Dedicas tiempo regular a aprender algo nuevo fuera de las materias obligatorias del colegio?",
+    ctx:"El hábito de aprender por curiosidad propia distingue a quien sigue creciendo de quien se detiene en lo mínimo.",
+    ops:["Solo estudio lo que es obligatorio para pasar las materias.","A veces veo algún video o tutorial, pero sin constancia.","Dedico algo de tiempo libre a aprender temas que me interesan.","Tengo un interés o habilidad que practico regularmente fuera del colegio.","Invierto tiempo semanal en formarme en algo que quiero dominar a futuro."] },
+
+  { cat:3, q:"¿Las personas con las que pasas más tiempo te impulsan a mejorar o te frenan?",
+    ctx:"El entorno cercano es el sistema invisible que facilita o sabotea cualquier hábito de liderazgo.",
+    ops:["Mis amistades me alejan de mis metas la mayoría de las veces.","Hay un poco de ambas cosas, pero siento que pesa más lo negativo.","Tengo amistades neutras, ni me impulsan ni me frenan demasiado.","La mayoría de mis amistades me animan a esforzarme y crecer.","Elijo intencionalmente rodearme de personas que me inspiran a ser mejor."] },
+  { cat:3, q:"¿Tu familia conoce tus sueños y metas de manera clara?",
+    ctx:"Un sueño compartido en casa encuentra más apoyo que un sueño guardado en silencio.",
+    ops:["Nunca hablo de mis metas en casa.","Lo he mencionado de pasada, pero no han profundizado en el tema.","Mi familia conoce algunas de mis metas generales.","He hablado abiertamente con mi familia sobre lo que quiero lograr.","Mi familia conoce mis metas y las apoya activamente en el día a día."] },
+  { cat:3, q:"¿Has participado en alguna actividad comunitaria, deportiva, cultural o religiosa en tu municipio?",
+    ctx:"El liderazgo se entrena en la práctica concreta dentro de espacios reales de comunidad.",
+    ops:["No participo en ninguna actividad fuera del colegio y mi casa.","He asistido alguna vez, pero sin involucrarme realmente.","Participo ocasionalmente en algún grupo o actividad local.","Soy parte activa de un grupo deportivo, cultural o comunitario.","Tengo un rol de responsabilidad dentro de una actividad o grupo comunitario."] },
+  { cat:3, q:"Cuando ves un problema en tu colegio o barrio (basura, falta de espacios, inseguridad), ¿qué haces?",
+    ctx:"Ver el problema sin actuar deja al joven como espectador; actuar, aunque sea poco, lo convierte en protagonista.",
+    ops:["Lo noto, pero pienso que no es asunto mío resolverlo.","Me quejo con mis amigos, pero no hago nada más.","A veces comento la situación a un adulto o profesor.","Propongo ideas o me uno a iniciativas que buscan solucionarlo.","Tomo la iniciativa de organizar o proponer una solución concreta al problema."] },
+  { cat:3, q:"¿Tienes acceso a algún adulto (profesor, familiar, líder comunitario) a quien puedas pedir consejo con confianza?",
+    ctx:"Ningún liderazgo crece en aislamiento; necesita mentores que orienten el camino.",
+    ops:["No tengo a nadie así, prefiero resolver todo solo.","Hay alguien, pero no me siento cómodo acudiendo a esa persona.","Tengo a alguien a quien acudo cuando la situación es muy grave.","Tengo una o dos personas de confianza con quienes hablo regularmente.","Cuento con mentores claros a quienes consulto mis decisiones importantes."] },
+  { cat:3, q:"¿Cómo describirías el ambiente de tu colegio respecto a apoyar los sueños de los estudiantes?",
+    ctx:"El entorno escolar puede ser invernadero o desierto para los sueños de un adolescente.",
+    ops:["Siento que al colegio no le importan realmente nuestros sueños.","Hay algo de apoyo, pero depende mucho del profesor o la materia.","Encuentro apoyo cuando lo busco activamente.","Mi colegio ofrece espacios reales para desarrollar talentos y proyectos.","Mi colegio impulsa activamente el liderazgo y los proyectos de vida de los estudiantes."] },
+  { cat:3, q:"¿Has pensado en cómo tu liderazgo podría beneficiar a otros jóvenes de Rionegro en situaciones similares a la tuya?",
+    ctx:"El liderazgo con propósito siempre mira más allá del beneficio individual.",
+    ops:["No he pensado en cómo lo que hago podría ayudar a otros.","Me gustaría ayudar algún día, pero no sé cómo empezar.","He ayudado a algún compañero de forma puntual.","Busco oportunidades para apoyar a otros jóvenes con lo que sé o tengo.","Tengo una idea concreta de cómo mi liderazgo puede multiplicarse en otros jóvenes de mi región."] },
+
+  { cat:4, q:"Cuando fallas en cumplir un compromiso (estudiar, entrenar, un proyecto), ¿qué sueles hacer después?",
+    ctx:"La diferencia entre quien crece y quien se estanca no es no fallar, sino qué hace después de fallar.",
+    ops:["Me siento tan mal que termino abandonando por completo la meta.","Lo dejo pasar varios días antes de intentar retomarlo.","Me cuesta, pero después de un tiempo vuelvo a intentarlo.","Identifico qué pasó y ajusto mi plan para la próxima vez.","Retomo casi de inmediato, viendo el fallo como parte normal del proceso."] },
+  { cat:4, q:"¿Qué tan fácil es para ti pedir ayuda cuando algo te supera?",
+    ctx:"Pedir ayuda a tiempo es una habilidad de liderazgo, no una debilidad.",
+    ops:["Casi nunca pido ayuda, prefiero resolverlo solo aunque me cueste mucho.","Me da vergüenza o miedo pedir ayuda, aunque la necesite.","Pido ayuda solo cuando ya no tengo otra opción.","Pido ayuda con relativa facilidad cuando reconozco que la necesito.","Reconozco rápido mis límites y busco apoyo sin que eso afecte mi confianza."] },
+  { cat:4, q:"¿Cómo reaccionas ante una crítica sobre algo que hiciste o lideraste?",
+    ctx:"Quien no aprende a recibir crítica sin derrumbarse, difícilmente puede sostener un liderazgo duradero.",
+    ops:["Me defiendo de inmediato o me enojo con quien me critica.","Me afecta tanto que prefiero no volver a intentarlo.","Me cuesta, pero trato de escuchar sin reaccionar mal.","Escucho con atención y considero si hay algo válido para mejorar.","Agradezco la crítica constructiva y la uso activamente para crecer."] },
+  { cat:4, q:"Cuando una meta tarda mucho más en cumplirse de lo que esperabas, ¿qué ocurre con tu motivación?",
+    ctx:"La constancia real se mide en la distancia larga, no en el entusiasmo del primer día.",
+    ops:["Pierdo el interés y termino abandonando la meta.","Me desanimo bastante y avanzo muy poco durante un tiempo.","Sigo intentando, aunque con menos energía que al inicio.","Ajusto el plan, pero mantengo la meta como prioridad.","Sostengo mi esfuerzo recordando por qué empecé, sin importar el tiempo que tome."] },
+  { cat:4, q:"¿Tienes alguna forma de revisar periódicamente si tus acciones diarias te están acercando a tus sueños?",
+    ctx:"Sin revisión periódica, hasta el esfuerzo más sincero puede perder su dirección.",
+    ops:["Nunca me detengo a revisar si voy en la dirección correcta.","Lo pienso de vez en cuando, sin un momento fijo para hacerlo.","Reviso mis avances cuando algo sale mal o me preocupa.","Tengo momentos regulares (semanales o mensuales) para evaluar mi progreso.","Reviso constantemente mis acciones y las ajusto con disciplina hacia mis metas."] },
+  { cat:4, q:"Frente a las dificultades económicas o sociales de tu entorno, ¿cómo enfrentas la tentación de creer que «no se puede»?",
+    ctx:"Crecer en un contexto con menos oportunidades exige una resistencia interior adicional contra el desánimo colectivo.",
+    ops:["Termino creyendo que mi situación no va a cambiar nunca.","Me desanimo con frecuencia al comparar mi entorno con otros más favorecidos.","Tengo días de duda, pero logro recordar que sí es posible avanzar.","Mantengo la esperanza activa y busco ejemplos de personas que lo han logrado.","Convierto las dificultades de mi entorno en una razón más fuerte para esforzarme y servir a otros."] },
+  { cat:4, q:"Si imaginas tu vida en diez años habiendo logrado tus sueños, ¿qué tan dispuesto estás hoy a sostener el esfuerzo necesario para llegar ahí?",
+    ctx:"El liderazgo praxeológico se sostiene en la coherencia entre el sueño imaginado y el esfuerzo diario sostenido.",
+    ops:["Sueño con eso, pero en la práctica no hago casi nada concreto por lograrlo.","Hago algunos esfuerzos aislados, sin mucha continuidad.","Trabajo en ello de forma irregular, según mi ánimo del momento.","Sostengo un esfuerzo constante la mayoría del tiempo.","Estoy completamente decidido a sostener el esfuerzo diario necesario, pase lo que pase."] }
+];
+
+const catNames = {1:"Identidad", 2:"Sistema", 3:"Entorno", 4:"Recaída y constancia"};
+const catEmoji = {1:"🧭", 2:"⚙️", 3:"🌱", 4:"🔄"};
+
+const niveles = [
+  { min:28, max:67,  name:"Sueño Dormido 🌙",        desc:"Tienes un potencial enorme todavía sin despertar. Hoy es el mejor día para empezar con un hábito pequeño.", action:"Esta semana, elige solo UNA acción diaria de 5 minutos relacionada con tu sueño y cúmplela todos los días." },
+  { min:68, max:95,  name:"Chispa en Camino 🌱",      desc:"Ya diste los primeros pasos. El reto ahora es la constancia: convertir intentos aislados en hábito.", action:"Define un horario fijo del día para trabajar en tu meta, aunque sean solo 15 minutos." },
+  { min:96, max:122, name:"Liderazgo en Construcción 🌿", desc:"Tienes bases sólidas. Es momento de fortalecer tu entorno y empezar a inspirar a otros.", action:"Comparte tu sueño con una persona de confianza esta semana y pídele que te acompañe en el proceso." },
+  { min:123,max:140, name:"Joven Líder en Acción 🔥",  desc:"Vives de forma coherente tu propósito. Tu reto es multiplicar tu liderazgo en otros jóvenes de tu comunidad.", action:"Identifica a un compañero que necesite el mismo empujón que tú alguna vez necesitaste, y ayúdalo." }
+];
+
+/* ════════════════════════════════════════════════════════════
+   DATOS: banco de preguntas rotativas diarias
+   ════════════════════════════════════════════════════════════ */
+const preguntasDiarias = [
+  "¿Qué hiciste hoy, aunque fuera pequeño, que te acercó a tu sueño?",
+  "Del 1 al 5, ¿qué tan fiel fuiste hoy a tu rutina planeada?",
+  "¿Qué obstáculo de hoy puedes convertir en una lección para mañana?",
+  "¿En qué momento de hoy actuaste como el líder que quieres ser?",
+  "¿Cuánto tiempo real le dedicaste hoy a tu meta, sin distracciones?",
+  "¿A quién ayudaste hoy, aunque fuera con algo pequeño?",
+  "Si hoy fuera el único día de la semana, ¿estarías orgulloso de cómo lo viviste?",
+  "¿Qué pensamiento negativo lograste callar hoy con una acción positiva?",
+  "¿Qué tan cerca te sientes hoy de tu sueño comparado con ayer?",
+  "¿Qué hábito necesitas ajustar mañana para avanzar más rápido?",
+  "¿Pediste ayuda hoy cuando la necesitabas, o lo intentaste todo solo?",
+  "¿Qué decisión tomaste hoy pensando en quién quieres ser en 10 años?",
+  "¿Cómo describirías tu nivel de disciplina hoy, del 1 al 5?",
+  "¿Qué le dirías hoy a tu yo del futuro sobre el esfuerzo de hoy?",
+  "¿Hiciste algo hoy por tu municipio, tu familia o tu comunidad?",
+  "¿Qué tan presente estuvo tu sueño en tus decisiones de hoy?",
+  "¿Qué distracción te costó más tiempo hoy del que querías darle?",
+  "¿Qué aprendiste hoy que no sabías ayer?",
+  "Si tu sueño pudiera verte hoy, ¿qué le mostrarías con orgullo?",
+  "¿Qué tan constante fuiste hoy comparado con tu mejor día de la semana?",
+  "¿Reconociste hoy algún talento tuyo que pusiste al servicio de otros?",
+  "¿Qué obstáculo externo (entorno, tiempo, dinero) intentaste superar hoy?",
+  "¿Qué tan honesto fuiste hoy contigo mismo sobre tu esfuerzo real?",
+  "¿Diste hoy un paso fuera de tu zona de comodidad?",
+  "¿Cómo manejaste hoy un momento de frustración o cansancio?",
+  "¿Qué tan alineado estuvo lo que hiciste hoy con tus valores?",
+  "¿Qué pequeña victoria de hoy merece ser celebrada?",
+  "Si mañana repitieras exactamente el día de hoy durante un año, ¿llegarías a tu sueño?"
+];
+
+/* ════════════════════════════════════════════════════════════
+   ESTADO Y NAVEGACIÓN
+   ════════════════════════════════════════════════════════════ */
+const STORAGE_KEY = "brujulaJoven_v1";
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+function saveState(state){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+let state = loadState() || {
+  name:"",
+  dream:"",
+  diagScore:null,
+  diagAnswers:{},
+  checkins:[],     // {date:"2026-06-17", value:3, note:"...", question:"..."}
+  lastDailyDate:null,
+  notif:{ enabled:false, time:"19:30" }
+};
+// Migración: si viene de una versión anterior sin "notif"
+if(!state.notif){ state.notif = { enabled:false, time:"19:30" }; }
+
+function goTo(screenId){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(screenId).classList.add("active");
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+// Al cargar: decidir pantalla inicial
+window.addEventListener("DOMContentLoaded", () => {
+  if(state.name && state.dream && state.diagScore !== null){
+    goTo("screen-dashboard");
+    renderDashboard();
+  } else if(state.name && state.dream){
+    goTo("screen-quiz");
+    renderQuestion();
+  }
+  // si no hay nada, se queda en welcome
+  if(document.getElementById("input-name")){
+    document.getElementById("input-name").value = state.name || "";
+    document.getElementById("input-dream").value = state.dream || "";
+  }
+});
+
+function saveSetupAndStart(){
+  const name = document.getElementById("input-name").value.trim();
+  const dream = document.getElementById("input-dream").value.trim();
+  if(!name || !dream){
+    alert("Por favor completa tu nombre y tu sueño antes de continuar.");
+    return;
+  }
+  state.name = name;
+  state.dream = dream;
+  saveState(state);
+  goTo("screen-quiz");
+  currentQuestion = 0;
+  answersTemp = {};
+  renderQuestion();
+}
+
+/* ════════════════════════════════════════════════════════════
+   QUIZ DIAGNÓSTICO
+   ════════════════════════════════════════════════════════════ */
+let currentQuestion = 0;
+let answersTemp = {};
+
+function renderQuestion(){
+  const total = diagnostico.length;
+  const q = diagnostico[currentQuestion];
+
+  document.getElementById("quiz-progress-label").textContent = `Pregunta ${currentQuestion+1} de ${total}`;
+  document.getElementById("quiz-cat-label").textContent = catNames[q.cat];
+  document.getElementById("progress-fill").style.width = `${((currentQuestion+1)/total)*100}%`;
+  document.getElementById("cat-chip").textContent = `${catEmoji[q.cat]} Momento ${q.cat} — ${catNames[q.cat]}`;
+  document.getElementById("q-context").textContent = q.ctx;
+  document.getElementById("q-text").textContent = q.q;
+
+  const list = document.getElementById("opt-list");
+  list.innerHTML = "";
+  q.ops.forEach((text, idx) => {
+    const div = document.createElement("div");
+    div.className = "opt" + (answersTemp[currentQuestion] === idx+1 ? " selected" : "");
+    div.innerHTML = `<span class="opt-dot"></span><span>${text}</span>`;
+    div.onclick = () => selectOption(idx+1);
+    list.appendChild(div);
+  });
+
+  document.getElementById("btn-back").style.visibility = currentQuestion === 0 ? "hidden" : "visible";
+  const nextBtn = document.getElementById("btn-next");
+  nextBtn.textContent = currentQuestion === total-1 ? "Ver mi resultado" : "Siguiente";
+  nextBtn.classList.toggle("enabled", answersTemp[currentQuestion] !== undefined);
+}
+
+function selectOption(value){
+  answersTemp[currentQuestion] = value;
+  renderQuestion();
+}
+
+function prevQuestion(){
+  if(currentQuestion > 0){
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function nextQuestion(){
+  if(answersTemp[currentQuestion] === undefined) return;
+  if(currentQuestion < diagnostico.length - 1){
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    finishDiagnostico();
+  }
+}
+
+function finishDiagnostico(){
+  let total = 0;
+  Object.values(answersTemp).forEach(v => total += v);
+  state.diagScore = total;
+  state.diagAnswers = answersTemp;
+  saveState(state);
+  showResult(total);
+}
+
+function showResult(score){
+  goTo("screen-result");
+  const nivel = niveles.find(n => score >= n.min && score <= n.max) || niveles[0];
+  document.getElementById("level-name").textContent = nivel.name;
+  document.getElementById("level-desc").textContent = nivel.desc;
+  document.getElementById("level-action").textContent = nivel.action;
+
+  const max = 140;
+  const circumference = 540; // 2*pi*86
+  const offset = circumference - (score/max)*circumference;
+  const ring = document.getElementById("result-ring");
+  // animar
+  setTimeout(()=>{ ring.style.transition = "stroke-dashoffset 1s ease"; ring.setAttribute("stroke-dashoffset", offset); }, 100);
+
+  // contador animado
+  let current = 0;
+  const target = score;
+  const stepTime = 18;
+  const steps = 40;
+  const inc = target/steps;
+  const el = document.getElementById("result-score-svg");
+  const timer = setInterval(()=>{
+    current += inc;
+    if(current >= target){ current = target; clearInterval(timer); }
+    el.textContent = Math.round(current);
+  }, stepTime);
+}
+
+function getNivelActual(){
+  const score = state.diagScore || 28;
+  return niveles.find(n => score >= n.min && score <= n.max) || niveles[0];
+}
+
+/* ════════════════════════════════════════════════════════════
+   DASHBOARD DIARIO
+   ════════════════════════════════════════════════════════════ */
+function todayStr(){
+  const d = new Date();
+  const yy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return `${yy}-${mm}-${dd}`;
+}
+
+function dayIndexForRotation(){
+  // índice estable basado en la fecha local, para que la pregunta rote una vez por día
+  const epoch = new Date(2026,0,1); // 1 enero 2026, hora local
+  const now = new Date();
+  const todayLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diffDays = Math.round((todayLocal - epoch) / (1000*60*60*24));
+  return ((diffDays % preguntasDiarias.length) + preguntasDiarias.length) % preguntasDiarias.length;
+}
+
+function getTodayCheckin(){
+  return state.checkins.find(c => c.date === todayStr());
+}
+
+function calcStreak(){
+  if(state.checkins.length === 0) return 0;
+  const dates = new Set(state.checkins.map(c=>c.date));
+  let streak = 0;
+  let cursor = new Date();
+  function localStr(d){
+    const yy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    return `${yy}-${mm}-${dd}`;
+  }
+  while(true){
+    const ds = localStr(cursor);
+    if(dates.has(ds)){
+      streak++;
+      cursor.setDate(cursor.getDate()-1);
+    } else {
+      if(ds === todayStr()) { cursor.setDate(cursor.getDate()-1); continue; }
+      break;
+    }
+  }
+  return streak;
+}
+
+function renderDashboard(){
+  document.getElementById("dash-name").textContent = state.name || "Joven líder";
+  document.getElementById("dash-dream").textContent = state.dream || "Define tu sueño en tu perfil";
+  document.getElementById("streak-count").textContent = calcStreak();
+
+  const hour = new Date().getHours();
+  const greet = hour < 12 ? "Buenos días," : hour < 19 ? "Buenas tardes," : "Buenas noches,";
+  document.getElementById("dash-greeting").textContent = greet;
+
+  // pregunta del día
+  const qIdx = dayIndexForRotation();
+  const question = preguntasDiarias[qIdx];
+  document.getElementById("daily-question").textContent = question;
+
+  const todayCheckin = getTodayCheckin();
+  renderDailyCard(question, todayCheckin);
+
+  // semana
+  renderWeekStrip();
+
+  // brújula / nivel
+  const nivel = getNivelActual();
+  document.getElementById("compass-level-name").textContent = nivel.name;
+  document.getElementById("compass-level-desc").textContent = nivel.desc;
+  const max = 140;
+  const score = state.diagScore || 28;
+  const circumference = 239; // 2*pi*38
+  const offset = circumference - (score/max)*circumference;
+  const miniRing = document.getElementById("mini-ring");
+  setTimeout(()=>{ miniRing.style.transition="stroke-dashoffset 1s ease"; miniRing.setAttribute("stroke-dashoffset", offset); }, 100);
+
+  // historial
+  renderHistory();
+
+  // racha perdida
+  checkStreakLost();
+
+  // notificaciones
+  renderNotifCard();
+  if(state.notif && state.notif.enabled){
+    scheduleNextNotification();
+  }
+}
+
+function renderDailyCard(question, existingCheckin){
+  const scaleRow = document.getElementById("scale-row");
+  const card = document.getElementById("card-daily");
+  const noteField = document.getElementById("daily-note");
+  const saveBtn = document.getElementById("btn-save-daily");
+
+  if(existingCheckin){
+    card.innerHTML = `
+      <div class="card-eyebrow">📍 Pregunta del día</div>
+      <div class="daily-q">${question}</div>
+      <div class="done-state">
+        <div class="check-circle">✓</div>
+        <p>Ya respondiste hoy con un nivel de <b>${existingCheckin.value}/5</b>.${existingCheckin.note ? " Anotaste: \u201c"+existingCheckin.note+"\u201d" : ""}</p>
+        <p style="margin-top:8px;">Vuelve mañana para tu próxima reflexión 🧭</p>
+      </div>
+    `;
+    return;
+  }
+
+  // reconstruir tarjeta interactiva (en caso de venir de un estado "done" previo)
+  card.innerHTML = `
+    <div class="card-eyebrow">📍 Pregunta del día</div>
+    <div class="daily-q" id="daily-question">${question}</div>
+    <div class="scale-row" id="scale-row"></div>
+    <textarea class="note-field" id="daily-note" placeholder="¿Qué harás distinto mañana? (opcional)"></textarea>
+    <button class="btn-save" id="btn-save-daily" onclick="saveDailyCheckin()">Guardar mi respuesta de hoy</button>
+  `;
+  const newScaleRow = document.getElementById("scale-row");
+  newScaleRow.innerHTML = "";
+  for(let i=1;i<=5;i++){
+    const btn = document.createElement("button");
+    btn.className = "scale-btn";
+    btn.textContent = i;
+    btn.onclick = () => {
+      document.querySelectorAll(".scale-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      btn.dataset.selected = "true";
+      selectedScaleValue = i;
+    };
+    newScaleRow.appendChild(btn);
+  }
+}
+
+let selectedScaleValue = null;
+
+function saveDailyCheckin(){
+  if(!selectedScaleValue){
+    alert("Elige un número del 1 al 5 antes de guardar.");
+    return;
+  }
+  const question = preguntasDiarias[dayIndexForRotation()];
+  const note = document.getElementById("daily-note").value.trim();
+  state.checkins.push({
+    date: todayStr(),
+    value: selectedScaleValue,
+    note: note,
+    question: question
+  });
+  saveState(state);
+  selectedScaleValue = null;
+  renderDashboard();
+}
+
+function renderWeekStrip(){
+  const strip = document.getElementById("week-strip");
+  strip.innerHTML = "";
+  const labels = ["L","M","X","J","V","S","D"];
+  const today = new Date();
+  const dow = (today.getDay() + 6) % 7; // 0=lunes
+
+  const dates = new Set(state.checkins.map(c=>c.date));
+
+  function localStr(d){
+    const yy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    return `${yy}-${mm}-${dd}`;
+  }
+
+  for(let i=0;i<7;i++){
+    const d = new Date(today);
+    d.setDate(today.getDate() - (dow - i));
+    const ds = localStr(d);
+    const filled = dates.has(ds);
+    const isToday = ds === todayStr();
+    const pip = document.createElement("div");
+    pip.className = "day-pip" + (filled ? " filled":"") + (isToday ? " today":"");
+    pip.innerHTML = `<span class="dot">${filled ? "🔥" : ""}</span><span>${labels[i]}</span>`;
+    strip.appendChild(pip);
+  }
+}
+
+function renderHistory(){
+  const list = document.getElementById("history-list");
+  list.innerHTML = "";
+  const items = [...state.checkins].reverse().slice(0,8);
+  if(items.length === 0){
+    list.innerHTML = `<div class="empty-history">Aún no tienes reflexiones guardadas. ¡Responde la pregunta de hoy para empezar tu historial! 🌱</div>`;
+    return;
+  }
+  items.forEach(c => {
+    const [yy, mm, dd] = c.date.split("-").map(Number);
+    const d = new Date(yy, mm-1, dd);
+    const dateLabel = d.toLocaleDateString("es-CO", {day:"numeric", month:"short"});
+    const div = document.createElement("div");
+    div.className = "history-item";
+    div.innerHTML = `
+      <div>
+        <div class="history-q">${c.question}</div>
+        ${c.note ? `<div style="font-size:.8rem;color:var(--gris);margin-top:4px;">"${c.note}"</div>` : ""}
+      </div>
+      <div style="text-align:right;">
+        <div class="history-score">${c.value}/5</div>
+        <div class="history-date">${dateLabel}</div>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function confirmReset(){
+  if(confirm("¿Seguro que quieres borrar todos tus datos guardados en este dispositivo? Esta acción no se puede deshacer.")){
+    localStorage.removeItem(STORAGE_KEY);
+    if(notifTimerId) clearTimeout(notifTimerId);
+    location.reload();
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   NOTIFICACIONES — Fase 2
+   Funcionan mientras el navegador siga corriendo (pestaña abierta,
+   minimizada, o app instalada como PWA). No son push reales del
+   servidor: si el navegador se cierra del todo, no llegan hasta
+   que el joven vuelva a abrir la app.
+   ════════════════════════════════════════════════════════════ */
+let notifTimerId = null;
+let swRegistration = null;
+
+function registerServiceWorker(){
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("./sw.js")
+      .then(reg => { swRegistration = reg; })
+      .catch(err => { console.warn("No se pudo registrar el service worker:", err); });
+  }
+}
+
+function localDateTimeStr(d){
+  const yy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return `${yy}-${mm}-${dd}`;
+}
+
+function renderNotifCard(){
+  const icon = document.getElementById("notif-status-icon");
+  const title = document.getElementById("notif-status-title");
+  const sub = document.getElementById("notif-status-sub");
+  const btn = document.getElementById("btn-toggle-notif");
+  const timeInput = document.getElementById("notif-time-input");
+
+  timeInput.value = state.notif.time || "19:30";
+
+  const permission = ("Notification" in window) ? Notification.permission : "unsupported";
+
+  if(state.notif.enabled && permission === "granted"){
+    icon.textContent = "🔔";
+    title.textContent = "Recordatorio activo";
+    sub.textContent = `Te avisaremos cada día a las ${formatTime12h(state.notif.time)}`;
+    btn.textContent = "Desactivar recordatorio";
+    btn.className = "btn-toggle-notif deactivate";
+    timeInput.disabled = false;
+  } else if(permission === "denied"){
+    icon.textContent = "🚫";
+    title.textContent = "Notificaciones bloqueadas";
+    sub.textContent = "Las habilitaste como bloqueadas en tu navegador. Revisa los permisos del sitio para activarlas.";
+    btn.textContent = "Revisar permisos del navegador";
+    btn.className = "btn-toggle-notif deactivate";
+  } else if(permission === "unsupported"){
+    icon.textContent = "🔕";
+    title.textContent = "No disponible en este navegador";
+    sub.textContent = "Tu navegador no soporta notificaciones. Prueba con Chrome o Edge.";
+    btn.style.display = "none";
+  } else {
+    icon.textContent = "🔕";
+    title.textContent = "Sin recordatorio activo";
+    sub.textContent = "Elige una hora y actívalo";
+    btn.textContent = "Activar recordatorio diario";
+    btn.className = "btn-toggle-notif activate";
+  }
+}
+
+function formatTime12h(time24){
+  const [h, m] = time24.split(":").map(Number);
+  const period = h >= 12 ? "p.m." : "a.m.";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return `${h12}:${String(m).padStart(2,"0")} ${period}`;
+}
+
+async function toggleNotifications(){
+  const permission = ("Notification" in window) ? Notification.permission : "unsupported";
+
+  if(permission === "unsupported"){
+    return;
+  }
+
+  if(permission === "denied"){
+    alert("Has bloqueado las notificaciones para este sitio. Para activarlas, ve a la configuración de tu navegador → Permisos del sitio → Notificaciones, y cámbialo a \"Permitir\".");
+    return;
+  }
+
+  if(state.notif.enabled){
+    // Desactivar
+    state.notif.enabled = false;
+    if(notifTimerId){ clearTimeout(notifTimerId); notifTimerId = null; }
+    saveState(state);
+    renderNotifCard();
+    return;
+  }
+
+  // Activar: pedir permiso si aún no se ha otorgado
+  if(permission !== "granted"){
+    const result = await Notification.requestPermission();
+    if(result !== "granted"){
+      renderNotifCard();
+      return;
+    }
+  }
+
+  const chosenTime = document.getElementById("notif-time-input").value || "19:30";
+  state.notif.enabled = true;
+  state.notif.time = chosenTime;
+  saveState(state);
+  renderNotifCard();
+  scheduleNextNotification();
+
+  // Notificación de confirmación inmediata
+  showLocalNotification(
+    "🧭 Recordatorio activado",
+    `Cada día a las ${formatTime12h(chosenTime)} te invitaremos a reflexionar sobre tu avance.`
+  );
+}
+
+function showLocalNotification(title, body){
+  if(!("Notification" in window) || Notification.permission !== "granted") return;
+  sendToSW(title, body);
+}
+
+function sendToSW(title, body){
+  if(navigator.serviceWorker && navigator.serviceWorker.controller){
+    navigator.serviceWorker.controller.postMessage({
+      type:"SHOW_NOTIFICATION",
+      payload:{ title, body, tag:"brujula-diaria" }
+    });
+  } else if(swRegistration){
+    swRegistration.showNotification(title, { body, icon:"./icon-192.png", badge:"./icon-192.png" });
+  } else {
+    try{ new Notification(title, { body, icon:"./icon-192.png" }); }catch(e){}
+  }
+}
+
+function scheduleNextNotification(){
+  if(notifTimerId){ clearTimeout(notifTimerId); notifTimerId = null; }
+  if(!state.notif.enabled || Notification.permission !== "granted") return;
+
+  const [h, m] = (state.notif.time || "19:30").split(":").map(Number);
+  const now = new Date();
+  let target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0, 0);
+  if(target <= now){
+    target.setDate(target.getDate() + 1);
+  }
+  const msUntil = target - now;
+
+  // setTimeout tiene un límite práctico (~24 días) pero como reprogramamos
+  // cada vez que se dispara o cada vez que se abre la app, es suficiente.
+  notifTimerId = setTimeout(() => {
+    const already = getTodayCheckin();
+    if(!already){
+      const qIdx = dayIndexForRotation();
+      showLocalNotification(
+        "🧭 Es hora de tu reflexión diaria",
+        preguntasDiarias[qIdx]
+      );
+    }
+    scheduleNextNotification(); // reprograma para el día siguiente
+  }, msUntil);
+}
+
+function checkStreakLost(){
+  const banner = document.getElementById("streak-lost-banner");
+  if(!banner) return;
+
+  const dates = state.checkins.map(c=>c.date).sort();
+  if(dates.length === 0){ banner.style.display = "none"; return; }
+
+  const lastDate = dates[dates.length-1];
+  const today = todayStr();
+
+  // calcular diferencia de días entre lastDate y hoy
+  const [ly,lm,ld] = lastDate.split("-").map(Number);
+  const [ty,tm,td] = today.split("-").map(Number);
+  const last = new Date(ly, lm-1, ld);
+  const now = new Date(ty, tm-1, td);
+  const diffDays = Math.round((now - last) / (1000*60*60*24));
+
+  if(diffDays >= 2){
+    banner.style.display = "flex";
+    banner.className = "streak-lost-banner";
+    banner.innerHTML = `<span class="emoji">💔</span><span>Tu racha se interrumpió: llevas <b>${diffDays} días</b> sin responder. No pasa nada, lo importante es retomar hoy. ¡Tu sueño sigue esperando!</span>`;
+  } else {
+    banner.style.display = "none";
+  }
+}
+
+/* Inicializar Service Worker y notificaciones al cargar */
+registerServiceWorker();
+window.addEventListener("DOMContentLoaded", () => {
+  if(state.notif && state.notif.enabled){
+    // Re-pedir el estado real del permiso (puede haber cambiado fuera de la app)
+    if("Notification" in window && Notification.permission !== "granted"){
+      state.notif.enabled = false;
+      saveState(state);
+    }
+  }
+});
+</script>
+</body>
+</html>
